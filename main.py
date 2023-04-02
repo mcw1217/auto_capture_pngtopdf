@@ -10,7 +10,3 @@ while(True) :
         break
 print("지정완료!",pos,ina)
 start(pos, ina)
-
-    
-
-    

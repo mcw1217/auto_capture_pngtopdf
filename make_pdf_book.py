@@ -2,6 +2,8 @@ import os
 from PyPDF2 import PdfFileReader, PdfMerger 
 import glob
 from PIL import Image
+from datetime import datetime
+now = datetime.now()
 def countp(cnt):
     a= glob.glob("./img/*.png")
     print(f"책 페이지 수:{cnt} || 복제된 페이지수: {len(a)}")
@@ -20,7 +22,7 @@ def pngtopdf(co):
         img_pdf = img.convert('RGB')    
         img_pdf.save(f"./img_pdf/{i}.pdf", resolution=100)
     print("pdf로 변환완료! ===> pdf를 묶음으로 변환합니다!")
-    list = glob.glob("./img_pdf/*.pdf")
+    list = sorted(glob.glob("./img_pdf/*.pdf"), key=os.path.getctime)
     merger = PdfMerger()
     for pdf in list:
         merger.append(pdf)
@@ -37,7 +39,7 @@ def self_pngtopdf():
         img_pdf = img.convert('RGB')    
         img_pdf.save(f"./img_pdf/{i}.pdf", resolution=100)
     print("pdf로 변환완료! ===> pdf를 묶음으로 변환합니다!")
-    list = glob.glob("./img_pdf/*.pdf")
+    list = sorted(glob.glob("./img_pdf/*.pdf"), key=os.path.getctime)
     merger = PdfMerger()
     for pdf in list:
         merger.append(pdf)
@@ -49,7 +51,7 @@ def self_countp():
     a= glob.glob("./img/*.png")
     print(f"복제된 페이지수: {len(a)}")
         
-# self_pngtopdf()
+self_pngtopdf()
 # countp()
 
         
