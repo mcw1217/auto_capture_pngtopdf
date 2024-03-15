@@ -3,7 +3,20 @@ from PyPDF2 import PdfFileReader, PdfMerger
 import glob
 from PIL import Image
 from datetime import datetime
+import requests
+
 now = datetime.now()
+
+#라인 메시지 전송
+api_url = "https://notify-api.line.me/api/notify"
+token = "LYy0yPmrqjMc3rmvdQR2WcbCCVZkmFlf6FZBZGEkpYQ"
+
+headers = {'Authorization':'Bearer '+token}
+
+
+
+
+
 def countp(cnt):
     a= glob.glob("./img/*.png")
     print(f"책 페이지 수:{cnt} || 복제된 페이지수: {len(a)}")
@@ -29,6 +42,10 @@ def pngtopdf(co):
     merger.write("output.pdf")
     merger.close()
     print("묶음으로 변환 완료!")
+    message = {
+        "message" : "[PDF추출기 알림] : Ebook에 대한 PDF 추출이 성공적으로 완료되었습니다!"
+    }
+    requests.post(api_url, headers= headers , data = message)
     
     
 def self_pngtopdf():
