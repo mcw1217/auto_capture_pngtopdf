@@ -7,7 +7,7 @@ import requests
 
 now = datetime.now()
 
-#라인 메시지 전송
+#라인 메시지 전송 / api_url, token을 자신의 line으로 변경해야 알림 확인 가능
 api_url = "https://notify-api.line.me/api/notify"
 token = "LYy0yPmrqjMc3rmvdQR2WcbCCVZkmFlf6FZBZGEkpYQ"
 
